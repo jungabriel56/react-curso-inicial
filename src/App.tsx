@@ -1,39 +1,66 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { InputAdd } from "./components/InputAdd";
+import { ToDoItem } from "./components/ToDoItem";
+import { List } from "./components/List";
+import { ToDoAPI, type IToDo } from "./shared/services/api/ToDoAPI";
+
+// ToDoAPI.getAll().then((data) => console.log("1", data));
+// ToDoAPI.create({ label: "Fazer café", completed: false });
+// ToDoAPI.create({ label: "Fazer almoço", completed: false });
+// ToDoAPI.create({ label: "Fazer jantar", completed: false });
+// ToDoAPI.getAll().then((data) => console.log("2", data));
+// ToDoAPI.updateById(1, { label: "To do 1" });
+// ToDoAPI.getAll().then((data) => console.log("3", data));
+
+
+
 
 export function App() {
-  const [value, setValue] = useState('')
- const [list, setList] = useState([
-  {id: 1, label: 'Fazer café', completed: false},
-  {id: 2, label: 'Fazer café', completed: false},
-  {id: 3, label: 'Fazer almoço', completed: false},
-  {id: 4, label: 'Fazer jantar', completed: false}
- ]);
 
+  const [list, setList] = useState<IToDo[]>([]);
 
+  useEffect(() => {
+    ToDoAPI.getAll()
+      .then(data => setList(data));
+  }, []);
+
+  const handleAdd = (value: string) => {
+
+    ToDoAPI.create({ label: value, completed: false})
+    .then(data => setList([...list, data]))
+  };
+
+  const handleComplete = (id: number) => {
+    setList([
+      ...list.map((item) => ({
+        ...item,
+        completed: item.id === id ? true : item.completed,
+      })),
+    ]);
+  };
+
+  const handleRemove = (id: number) => {
+    setList([...list.filter((item) => item.id !== id)]);
+  };
 
   return (
     <div>
-      <input type="text" value={value} onChange={(e) => setValue(e.target.value)} />
-      <button onClick={() => {
-        setList([...list,{id: (list.length + 1), label: value, completed: false}])
-        setValue('')
-      }}
-      >Adicionar</button>
+      <InputAdd onAdd={handleAdd} />
 
-      <ol>
-        {list.map((listItem: {id: number, label: string, completed: boolean}) => (
-          <li key={listItem.id}>{listItem.label} 
-
-          {listItem.completed ? 'Concluido' : ''} 
-
-            <button onClick={() => setList([...list.map(item => ({ ...item, completed: item.id === listItem.id ? true : item.completed}))])}>Concluir</button> 
-            <button onClick={() => setList([...list.filter(item => item.id !== listItem.id)])}>Remover</button> 
-          </li>
-        ))}
-      </ol>
+      <List>
+        {list.map(
+          (listItem: { id: number; label: string; completed: boolean }) => (
+            <ToDoItem
+              key={listItem.id}
+              id={listItem.id}
+              label={listItem.label}
+              completed={listItem.completed}
+              onComplete={() => handleComplete(listItem.id)}
+              onRemove={() => handleRemove(listItem.id)}
+            />
+          ),
+        )}
+      </List>
     </div>
-  )
+  );
 }
-
-
-
