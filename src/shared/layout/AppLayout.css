@@ -1,0 +1,88 @@
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Segoe UI', Roboto, Arial, Helvetica, sans-serif;
+  background-color: #f5f6fa;
+  color: #333;
+}
+
+.layout-base {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #f2f2f2;
+  box-shadow: 0 0 8px #0000000d;
+}
+
+.layout-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 20px 32px;
+  background: linear-gradient(90deg, #2e8b57, #3cb371);
+  color: #fff;
+  box-shadow: 0 2px 6px #0000001a;
+}
+
+.layout-header a {
+  padding: 10px 16px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.7s ease;
+  border-radius: 6px;
+}
+
+.layout-header a:hover {
+  background-color:#ffffff33;
+
+
+}
+
+.layout-header a:active {
+  background-color: #ffffff4d;
+}
+/* From Uiverse.io by Madflows */ 
+.button {
+  position: relative;
+  overflow: hidden;
+  height: 2rem;
+  padding: 0 1.5rem;
+  border-radius: 1.5rem;
+  background: #3d3a4e;
+  background-size: 400%;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.button:hover::before {
+  transform: scaleX(1);
+}
+
+.button-content {
+  position: relative;
+  z-index: 1;
+}
+
+.button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  width: 100%;
+  height: inherit;
+  border-radius: inherit;
+  background: linear-gradient(
+    82.3deg,
+    rgba(150, 93, 233, 1) 10.8%,
+    rgba(99, 88, 238, 1) 94.3%
+  );
+  transition: all 0.475s;
+}
