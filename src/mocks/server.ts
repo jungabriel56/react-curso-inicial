@@ -9,7 +9,6 @@ createServer({
         if(toDosAsString === null) return;
 
         const toDos = JSON.parse(toDosAsString);
-        console.log(toDos)
 
         toDos.models.forEach((toDo: {}) => server.schema.create('toDos', toDo))
     },

@@ -1,18 +1,13 @@
-
-import { About } from "./pages/About";
-import { Home } from "./pages/Home";
-import { AppLayout } from "./shared/layout/AppLayout";
-
-
-
+import { AppRoutes } from "./Routes";
+import { AuthProvider } from "./shared/contexts/AuthContext";
 
 
 export function App() {
 
+
   return (
-      <AppLayout>
-        <Home />
-        <About />
-      </AppLayout>
-  )
+    <AuthProvider>
+      <AppRoutes />
+    </AuthProvider>
+  );
 }

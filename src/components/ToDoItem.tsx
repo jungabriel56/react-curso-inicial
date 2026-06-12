@@ -1,3 +1,5 @@
+import { Link } from 'react-router'
+
 import ToDoItemStyles from "./ToDoItem.module.css";
 
 interface ToDoItemProps {
@@ -18,7 +20,9 @@ export const ToDoItem = ({
 }: ToDoItemProps) => {
   return (
     <li key={id} className={ToDoItemStyles.Item} data-complete={completed}>
-      <span className={ToDoItemStyles.Text}>{label}</span>
+      <Link to={`/detalhe/${id}`} className={ToDoItemStyles.Text}>
+        {label}
+      </Link>
 
        <div className={ToDoItemStyles.ButtonsGroup}>
         {!completed && (
