@@ -6,8 +6,9 @@ export const AppLayout = ({ children }: React.PropsWithChildren) => {
     return (
         <div className='layout-base'>
             <div className='layout-header'>
-                <NavLink to={'/'}>Página Inicial</NavLink>
-                <NavLink to={'/sobre'}>Sobre</NavLink>
+                <NavLink to='/'>Página Inicial</NavLink>
+                <NavLink to='/todos'>TODOs</NavLink>
+                <NavLink to='/sobre'>Sobre</NavLink>
             </div>
 
             <hr className='layout-divider'/>

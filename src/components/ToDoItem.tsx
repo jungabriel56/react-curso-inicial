@@ -20,7 +20,7 @@ export const ToDoItem = ({
 }: ToDoItemProps) => {
   return (
     <li key={id} className={ToDoItemStyles.Item} data-complete={completed}>
-      <Link to={`/detalhe/${id}`} className={ToDoItemStyles.Text}>
+      <Link to={`/todos/detalhe/${id}`} className={ToDoItemStyles.Text}>
         {label}
       </Link>
 

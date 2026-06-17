@@ -46,6 +46,11 @@ body,
 .layout-header a:active {
   background-color: #ffffff4d;
 }
+
+.layout-header a.active {
+  background-color: #ffffff4d;
+}
+
 /* From Uiverse.io by Madflows */ 
 .button {
   position: relative;
@@ -86,3 +91,4 @@ body,
   );
   transition: all 0.475s;
 }
+

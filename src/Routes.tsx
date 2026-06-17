@@ -1,10 +1,11 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router";
 
 import { Login } from "./pages/public/Login";
-import { About } from "./pages/About";
-import { Home } from "./pages/Home";
+import { About } from "./pages/private/About";
+import { Home } from './pages/private/Home'
 import { AppLayout } from "./shared/layout/AppLayout";
-import { Detail } from "./pages/Detail";
+import { TodoDetail } from "./pages/private/todos/TodoDetail";
+import { Todo } from "./pages/private/todos/Todo";
 import { useIsAuthenticated } from "./shared/contexts/AuthContext";
 
 export const AppRoutes = () => {
@@ -17,7 +18,9 @@ export const AppRoutes = () => {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/sobre" element={<About />} />
-              <Route path="/detalhe/:id" element={<Detail />} />
+
+              <Route path="/todos" element={<Todo />} />
+              <Route path="/todos/detalhe/:id" element={<TodoDetail />} />
 
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>

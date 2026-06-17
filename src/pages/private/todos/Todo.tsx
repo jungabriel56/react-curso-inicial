@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
-import { ToDoAPI, type IToDo } from "../shared/services/api/ToDoAPI";
-import { InputAdd } from "../components/InputAdd";
-import { List } from "../components/List";
-import { ToDoItem } from "../components/ToDoItem";
-import { PageLayout } from "../shared/layout/page-layout/PageLayout";
+import { Link } from "react-router";
+import { ToDoAPI, type IToDo } from '../../../shared/services/api/ToDoAPI'
+import { List } from "../../../components/List";
+import { ToDoItem } from "../../../components/ToDoItem";
+import { PageLayout } from "../../../shared/layout/page-layout/PageLayout";
+import TodoStyles from "./Todo.module.css"
 
+export const Todo = () => {
 
-export const Home = () => {
    const [list, setList] = useState<IToDo[]>([]);
    
      useEffect(() => {
@@ -14,11 +15,6 @@ export const Home = () => {
          .then(data => setList(data));
      }, []);
    
-     const handleAdd = (value: string) => {
-   
-       ToDoAPI.create({ label: value, completed: false})
-       .then(data => setList([...list, data]))
-     };
    
      const handleComplete = (id: number) => {
        ToDoAPI.updateById(id, {completed: true}).then(() => {
@@ -44,7 +40,11 @@ export const Home = () => {
    
      return (
        <PageLayout title="TODO List">
-         <InputAdd onAdd={handleAdd} />
+        <div className={TodoStyles.ButtonContainer}>
+         <Link to='/todos/detalhe/adicionar'  className={TodoStyles.Button}>
+          Adicionar
+          </Link>
+        </div>
    
          <List>
            {list.map(

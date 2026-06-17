@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useCallback, useContext, useState } from "react";
 
 interface IAuthContextProps{
     email: string | undefined;
@@ -19,17 +19,17 @@ export const AuthProvider = ({children}: React.PropsWithChildren) => {
 
 
 
-    const logout = () => {
+    const logout = useCallback(() => {
         setEmail(undefined);
         setAccessToken(undefined);
-    }
+    }, [])
 
-    const login = (email: string, password: string) => {
+    const login = useCallback((email: string, password: string) => {
         console.log(email, password)
 
         setEmail(email);
         setAccessToken(crypto.randomUUID())
-    }
+    }, [])
 
     return (
         <AuthContext.Provider value={{login, logout, accessToken, email}}>
